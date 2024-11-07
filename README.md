@@ -26,3 +26,12 @@ where Tribes lack criminal jurisdiction and estimated effects get larger as cont
 Open the 'final_visuals.ipynb' file and hit run all. Make sure all packages
 specified in the first cell are installed.
 
+# Data Sources
+
+National Center for Health Statistics. (2022). Mortality Multiple Cause Files, 1998-2020 [Data set]. Centers for Disease Control and Prevention. https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Mortality_Multiple
+
+Vega-Datasets Contributors. (2024). US 10m TopoJSON. In Vega Datasets. https://github.com/vega/vega-datasets/blob/main/data/us-10m.json
+
+Vega-Datasets Contributors. (2024). US 10m TopoJSON. In Vega Datasets. https://github.com/vega/vega-datasets/blob/main/data/us-10m.json
+
+![Alt text](screenshot.png)
