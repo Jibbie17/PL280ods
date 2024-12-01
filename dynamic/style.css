@@ -1,0 +1,40 @@
+/* these styles apply to the entire page */
+
+h1 {
+  Text-align: center;
+}
+section {
+  border: 0px solid grey;
+  padding-left: 1em;
+  margin: 1em;
+}
+div {
+margin: 5em
+}
+body {
+  font-family: monospace;
+  padding-left: 5em;
+  margin: 3em;
+}
+table {
+  margin: 1em;
+}
+tbody > tr > td {
+  border-top: 1px solid black;
+}
+thead {
+  font-weight: bold;
+}
+svg {
+  border: 0px dashed grey;
+}
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  padding: 5px;
+  font: 12px sans-serif;
+  background: rgba(25, 44, 82, 0.9);
+  border-radius: 8px;
+  color: white;
+}

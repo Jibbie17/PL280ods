@@ -1,0 +1,216 @@
+<html>
+  <head>
+    <link href="style.css" rel="stylesheet" />
+    <script src="js/d3.v7.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+  </head>
+  <body>
+    <h1>The Opiods Crisis on Reservations</h1>
+
+    <section>
+      <h2>  </h2>
+      <p> How to use this Map </p>
+
+      <ol>
+        <li>
+            Step 1
+        </li>
+        <li>
+            Step 2
+        </li>
+        <li>
+            Step 3
+        </li>
+        <li>
+            Step 4
+        </li>
+        <li>
+            Step 5
+        </li>
+        <li>
+            Step 6
+        </li>
+      </ol>
+
+
+      <div class="dropdown-container">
+        <label for="dropdown">Choose A Year:</label>
+        <select id="dropdown" class="dropdown-menu">
+        </select>
+        <svg></svg>
+        </div> 
+      
+      <!-- This is where the content should go -->
+      <div id = citations>
+        This source got me started:
+        https://billmill.org/making_a_us_map.html 
+      </div>
+      <div class="container">
+        <div id="map"></div>
+        <svg></svg>
+      </div>   
+
+      <script>
+
+        // Set the dropdown first, because we want it outside of the function
+        const dropdown = d3
+              .select("#dropdown")
+        
+        const years_range = [{year: 1999}, {year: 2000}, {year: 2001}, {year: 2002},
+                              {year: 2003}, {year: 2004}, {year: 2005},
+                              {year : 2006}, {year: 2007}, {year:2008}, {year:2009},
+                              {year : 2010}, {year : 2011}, {year :2012}, {year:2013},
+                               {year: 2014}, {year: 2015}, {year: 2016}, {year: 2017},
+                                {year: 2018}, {year: 2019}, {year: 2020}]
+
+          dropdown.selectAll("option")
+              .data(years_range)
+              .join("option")
+              .attr("value", d => d.year)
+              .text(d => d.year.toString());
+
+        // Sets the base layer that we call d3 on
+        const width = 975;
+        const height = 610;
+        const svg = d3
+          .select("#map")
+          .append("svg")
+          .attr("viewBox", [0, 0, width, height])
+          .attr("width", width)
+          .attr("height", height);
+
+      // set up projection centered on U.S.
+      const projection = d3
+        // DEMO: change projection
+        //   https://d3js.org/d3-geo/conic
+        //   https://github.com/d3/d3-geo-projection
+        .geoAlbers()
+        .center([15, 54])
+        .scale(600)
+        .translate([width / 2, height / 2]);
+
+      const path = d3.geoPath().projection(projection);
+      
+      
+        // placeholder tooltip
+        const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+        // display data
+      Promise.all([
+        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json"),
+        d3.csv("http://127.0.0.1:5000/overview.csv")
+      ]).then(([map_data, overview_data]) => {
+        
+        //let overview_data = d3.csvParse(overview_text);
+        console.log(overview_data);
+
+        // Define the state boundaries in geojson
+        let statesjson = topojson.feature(map_data, map_data.objects.states);
+
+        // Define the scale for purple and orange
+        color_data = overview_data.slice(1).map(row => row['drd_AIAN_p100k'])
+        data_range = d3.extent(color_data.map(Number))
+        const purpleScale = d3
+          .scaleSequential(d3.interpolatePurples)
+          .domain([0, Math.max(...data_range)]);
+        
+        const orangeScale = d3
+          .scaleSequential(d3.interpolateOranges)
+          .domain(data_range);
+        
+        // Create a mapping between our csv and the id
+        // To figure this out I asked Perplexity AI:
+        // How would I do a nested data join with a topojson file?
+        const dataMap = new Map(overview_data.map(d => [d.id, d]));
+        statesjson.features.forEach(feature => {
+        const matchingData = dataMap.get(feature.id); 
+        if (matchingData) {
+            feature.properties = {
+                ...feature.properties,
+                ...matchingData 
+            };
+        }
+        });
+        
+
+        
+        svg
+          .selectAll(".group")
+          .data(statesjson.features)
+          .join("path")
+          .attr('d', d3.geoPath())
+          .attr("fill", function(d) {
+          if (d.properties.rd_AIAN_p100k === 'undefined'){
+            return "#ccc"}
+          else if (d.properties.Jurisdiction === "State"){
+          return orangeScale(d.properties.drd_AIAN_p100k);}
+          else if (d.properties.Jurisdiction === "Tribal Authority"){
+          return purpleScale(d.properties.drd_AIAN_p100k)}
+          else return "#ccc";})
+          .on("mouseover", function (event, d) {
+            tooltip.transition().duration(200).style("opacity", 0.9);
+            tooltip
+              .html(
+                `${d.properties.drd_AIAN_p100k} deaths per 100,000 Persons`)
+              .style("left", event.pageX + 10 + "px")
+              .style("top", event.pageY - 28 + "px");
+          })
+          .on("mouseout", function () {
+            tooltip.transition().duration(500).style("opacity", 0);
+          });
+          ;
+      });
+
+      </script>
+      
+      <script>
+        // This is the example from the linked source
+        function map(mapdata) {
+        const width=975,
+          height=610;
+
+        // Create an svg element to hold our map, and set it to the proper width and
+        // height. The viewBox is set to a constant value becase the projection we're
+        // using is designed for that viewBox size:
+        // https://github.com/topojson/us-atlas#us-atlas-topojson
+        const svg = d3.select("#map").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("viewBox", [0, 0, 975, 610])
+            .attr("style", "width: 100%; height: auto; height: intrinsic;");
+
+        // Create the US boundary
+        const usa = svg
+          .append('g')
+          .append('path')
+          .datum(topojson.feature(mapdata, mapdata.objects.nation))
+          .attr('d', d3.geoPath())
+
+        // Create the state boundaries. "stroke" and "fill" set the outline and fill
+        // colors, respectively.
+        const state = svg
+          .append('g')
+          .attr('stroke', '#444')
+          .attr('fill', '#eee')
+          .selectAll('path')
+          .data(topojson.feature(mapdata, mapdata.objects.states).features)
+          .join('path')
+          .attr('vector-effect', 'non-scaling-stroke')
+          .attr('d', d3.geoPath());
+      }
+
+      window.addEventListener('DOMContentLoaded', async (event) => {
+        const res = await fetch(`https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json`)
+        const mapJson = await res.json()
+        //map(mapJson)
+      });
+
+      </script>
+    <div id="map"></div>
+    </section>
+  </body>
+</html>
