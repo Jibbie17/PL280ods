@@ -22,10 +22,11 @@ def get_states():
 @app.route('/counties')
 def get_counties():
     id = int(request.args.get('id'))
+    year = int(request.args.get('year'))
     counties = load_counties()
     counties = counties.filter(pl.col("STATEFP")==id).with_columns(
         pl.col("County.Code").alias("FIPS")
-    )
+    ).filter(pl.col("Year") == year)
 
     return counties.write_csv()
 

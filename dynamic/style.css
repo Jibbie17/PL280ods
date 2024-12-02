@@ -9,12 +9,13 @@ section {
   margin: 1em;
 }
 div {
-margin: 5em
+margin: 1em
 }
 body {
-  font-family: monospace;
+  font-family: fantasy;
   padding-left: 5em;
-  margin: 3em;
+  margin: 1em;
+  background-color: rgb(128, 157, 225);
 }
 table {
   margin: 1em;
@@ -33,7 +34,7 @@ div.tooltip {
   text-align: center;
   width: auto;
   padding: 5px;
-  font: 12px sans-serif;
+  font: 12px monospace;
   background: rgba(25, 44, 82, 0.9);
   border-radius: 8px;
   color: white;

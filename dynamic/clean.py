@@ -33,6 +33,8 @@ def make_juris_labels(int):
         out (str): A string that is either "State" or "Tribal Authority"
     """
     out = "Unknown"
+    if int == 2:
+        out = "Mixed"
     if int == 1:
         out = "State"
     if int == 0:

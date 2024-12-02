@@ -13,22 +13,25 @@
 
       <ol>
         <li>
-            Step 1
+            This Map loads with the Average Drug-Related Death rates
+            in each state accross all years. Darker colors correspond to 
+            higher death-rates.
         </li>
         <li>
-            Step 2
+            Hover over a state to view that state's death rate.
         </li>
         <li>
-            Step 3
+            Select a specific year to view the death rates in that year.
         </li>
         <li>
-            Step 4
+            In purple states Tribes have criminal jurisdiction. In orange states
+            Tribes don't have criminal jurisdiction. Green states are mixed.
         </li>
         <li>
-            Step 5
+            Click a specific state to see the breakdown at the county level!
         </li>
         <li>
-            Step 6
+            Have fun!
         </li>
       </ol>
 
@@ -37,14 +40,12 @@
         <label for="dropdown">Choose A Year:</label>
         <select id="dropdown" class="dropdown-menu">
         </select>
-        <svg></svg>
         </div> 
       
       <!-- This is where the content should go -->
-      <div id = citations>
-        This source got me started:
-        https://billmill.org/making_a_us_map.html 
+      <div id = citations>        
       </div>
+      
       <div class="container">
         <div id="map"></div>
         <svg></svg>
@@ -70,7 +71,13 @@
               .text(d => d.year.toString());
           
               
-          
+        // Placeholder for the tooltip
+        const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
         // Sets the base layer that we call d3 on
         const width = 975;
         const height = 610;
@@ -83,21 +90,19 @@
       
       // define the function for zooming in on a state
       // Load the TopoJSON data
-      function map_state(id){
+      function map_state(id, year){
           let search = "http://127.0.0.1:5000/counties?id=";
-          let query = search + id;
+          let query = search + id + "&" + "year=" + year.toString();
           Promise.all([
           d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
-          d3.csv(query)
-        ]).
+          d3.csv(query)]).
           then(([map_data, overview_data]) => {
-            console.log(map_data);
-
+            console.log(overview_data)
             let geojson = topojson.feature(map_data, map_data.objects.counties);
             let counties = geojson.features
 
             // Now we need to find the state we are interested in
-            const stateFIPS = "06"; // FIPS code for California
+            const stateFIPS = id; // FIPS code for California
             const state = topojson.feature(map_data, map_data.objects.states).features
             .find(d => d.id === stateFIPS);
 
@@ -134,36 +139,63 @@
               .scaleSequential(d3.interpolateOranges)
               .domain(data_range);
 
-        // Create a mapping between our csv and the id
-        // To figure this out I asked Perplexity AI:
-        // How would I do a nested data join with a topojson file?
-        const dataMap = new Map(overview_data.map(d => [d.FIPS, d]));
-        counties.forEach(feature => {
-        const matchingData = dataMap.get(feature.id); 
-        if (matchingData) {
-            feature.properties = {
-                ...feature.properties,
-                ...matchingData 
-            };
-          };
+            // Create a mapping between our csv and the id
+            // To figure this out I asked Perplexity AI:
+            // How would I do a nested data join with a topojson file?
+            const dataMap = new Map(overview_data.map(d => [d.FIPS, d]));
+            counties.forEach(feature => {
+            const matchingData = dataMap.get(feature.id); 
+            if (matchingData) {
+               feature.properties = {
+                  ...feature.properties,
+                  ...matchingData 
+               };
+             };
+            });
 
             // Draw the map
             svg
             .selectAll("path")                
             .data(counties)
             .join("path")
-            .attr('d', path);})
+            .attr('d', path)
             .attr("fill", function(d) {
-          if (d.properties.rd_AIAN_p100k === 'undefined'){
-            return "#ccc"}
-          else if (d.properties.Jurisdiction === "State"){
+           if (d.properties.Jurisdiction === "State"){
           return orangeScale(d.properties.drd_AIAN_p100k);}
           else if (d.properties.Jurisdiction === "Tribal Authority"){
           return purpleScale(d.properties.drd_AIAN_p100k)}
-          else return "#ccc";})
-
+          else if (d.FIPS === id) {return "#ccc"}
+          else {return "#ccc"};})
+          .on("mouseover", function (event, d) {
+            tooltip.transition().duration(200).style("opacity", 0.9);
+            tooltip
+              .html(
+                `${d.properties.cnty_name}, ${d.properties.state_abb} <br/>
+                 Criminal Jurisdiction: ${d.properties.Jurisdiction} <br/>
+                ${d.properties.drd_AIAN_p100k} per 100K`)
+              .style("left", event.pageX + 10 + "px")
+              .style("top", event.pageY - 28 + "px");
+          })
+          .on("mouseout", function () {
+            tooltip.transition().duration(500).style("opacity", 0);
+        
+        // What happens on the drop down?
+        // First remove previous event listeners
+        //let ddown = document.getElementById('dropdown');
+        //ddown.replaceWith(ddown.cloneNode(true));
+        console.log(id)
+        dropdown.on("change", function() {
+        let cy = d3.select(this).property("value");
+        d3.selectAll("#map")
+        .selectAll("path")
+        .remove();
+        map_state(id, cy);
+        console.log("year:", cy);});
+        
           });
-        };
+          });
+        }
+        
 
       function map_us(csv_request){ 
       // set up projection centered on U.S.
@@ -178,13 +210,6 @@
 
       const path = d3.geoPath().projection(projection);
       
-      
-      // placeholder tooltip
-      const tooltip = d3
-      .select("body")
-      .append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
 
       // display data
       Promise.all([
@@ -192,7 +217,22 @@
         d3.csv(csv_request)
       ]).then(([map_data, overview_data]) => {
         
+      // Set the color scale
+      // Define the scale for purple orange, and blue
+      color_data = overview_data.slice(1).map(row => row['drd_AIAN_p100k'])
+      data_range = d3.extent(color_data.map(Number))
+      
+      const purpleScale = d3
+      .scaleSequential(d3.interpolatePurples)
+      .domain([0, Math.max(...data_range)]);
 
+      const blueScale = d3
+      .scaleSequential(d3.interpolateGreens)
+      .domain([0, Math.max(...data_range)]);
+  
+      const orangeScale = d3
+        .scaleSequential(d3.interpolateOranges)
+        .domain(data_range);
 
         // Define the state boundaries in geojson
         let statesjson = topojson.feature(map_data, map_data.objects.states);
@@ -221,29 +261,37 @@
             return "#ccc"}
           else if (d.properties.Jurisdiction === "State"){
           return orangeScale(d.properties.drd_AIAN_p100k);}
+          else if (d.properties.Jurisdiction === "Mixed"){
+            return blueScale(d.properties.drd_AIAN_p100k);
+          }
           else if (d.properties.Jurisdiction === "Tribal Authority"){
           return purpleScale(d.properties.drd_AIAN_p100k)}
           else return "#ccc";})
+          .attr("code", function(d){return d.properties.id})
+          .on("click", function(){
+            let state_id = d3.select(this).attr("code")
+            if (state_id===undefined){return}
+            d3.selectAll("#map")
+            .selectAll("path")
+            .remove();
+            map_state(state_id, 2020)})
           .on("mouseover", function (event, d) {
-            tooltip.transition().duration(200).style("opacity", 0.9);
+            let mod = 0;
+            if (d.properties.State === undefined)
+            {let mod = 200}
+            tooltip.transition().duration(200-mod).style("opacity", 0.9);
             tooltip
               .html(
-                `${d.properties.drd_AIAN_p100k} deaths per 100,000 Persons`)
+                 `${d.properties.State} <br/>
+                 Criminal Jurisdiction Held by: ${d.properties.Jurisdiction} <br/>
+                ${d.properties.drd_AIAN_p100k} deaths per 100,000 Persons`)
               .style("left", event.pageX + 10 + "px")
               .style("top", event.pageY - 28 + "px");
           })
           .on("mouseout", function () {
             tooltip.transition().duration(500).style("opacity", 0);
           });
-          ;
-      });}
-
-      window.addEventListener('DOMContentLoaded', async (event) => {
-        let start = "http://127.0.0.1:5000/overview.csv"
-        //map_us(start)
-        map_state("06")
-      });
-
+          
       // What happens when the dropdown is changed?
       dropdown.on("change", function() {
         let cy = d3.select(this).property("value");
@@ -254,54 +302,19 @@
         console.log("csv:", csv);
         map_us(csv);
         console.log("year:", cy);});
-      
-      
-      </script>
-      
-      <script>
-        // This is the example from the linked source
-        function map(mapdata) {
-        const width=975,
-          height=610;
 
-        // Create an svg element to hold our map, and set it to the proper width and
-        // height. The viewBox is set to a constant value becase the projection we're
-        // using is designed for that viewBox size:
-        // https://github.com/topojson/us-atlas#us-atlas-topojson
-        const svg = d3.select("#map").append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .attr("viewBox", [0, 0, 975, 610])
-            .attr("style", "width: 100%; height: auto; height: intrinsic;");
-
-        // Create the US boundary
-        const usa = svg
-          .append('g')
-          .append('path')
-          .datum(topojson.feature(mapdata, mapdata.objects.nation))
-          .attr('d', d3.geoPath())
-
-        // Create the state boundaries. "stroke" and "fill" set the outline and fill
-        // colors, respectively.
-        const state = svg
-          .append('g')
-          .attr('stroke', '#444')
-          .attr('fill', '#eee')
-          .selectAll('path')
-          .data(topojson.feature(mapdata, mapdata.objects.states).features)
-          .join('path')
-          .attr('vector-effect', 'non-scaling-stroke')
-          .attr('d', d3.geoPath());
-      }
+      });}
 
       window.addEventListener('DOMContentLoaded', async (event) => {
-        const res = await fetch(`https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json`)
-        const mapJson = await res.json()
-        //map(mapJson)
+        let start = "http://127.0.0.1:5000/overview.csv"
+        map_us(start)
+        //map_state("27", 2020)
       });
 
+      
+      // This source got me started
       </script>
-    <div id="map"></div>
+      
     </section>
   </body>
 </html>
