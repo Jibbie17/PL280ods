@@ -106,6 +106,7 @@
         const europeCountries = geojson.features.filter(
           (d) => euMemberStates[d.properties.name] !== undefined,
         );
+        console.log(europeCountries)
 
         svg
           .selectAll("path")

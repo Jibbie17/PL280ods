@@ -65,6 +65,64 @@ def group_states_mod(df , grp = "State"):
     return grouped_df
 
 
+
+
+
+def pad_code_5(int):
+    """
+    Takes:
+        int (int): An integer, often a FIPS code that is displaying as a integer
+        that we need to convert to a 5-character string
+
+    Returns:
+        out (str): A 5-digit fips code string. If the integer given was less than five
+        a 0 is added up front.
+    """
+    string = str(int)
+    if len(string) < 5:
+       string = "".join(["0", string])
+    
+    return string
+
+
+def consolidate_counties(state_abb, filter = True):
+    """
+    For a given state, returns a dataframe with only counties from that state
+    and aggregates the relevant statistics.
+    Takes:
+        State_abb (str): String state abbreviation ("MN", "AK", etc.)
+        filter (Bool): Says whether to throw out non-matching states.
+        df (polars dataframe): The dataframe we want to filter
+    Returns:
+        df (Polars df): A polars data frame of the counties we want.
+    """
+
+    if filter ==True:
+        df= df.filter(pl.col("state_abb")==state_abb)
+    df = df.with_columns(pl.col("state_crim").map_elements(make_juris_labels).alias("Jurisdiction"),
+                         pl.col("County.Code").map_elements(pad_code_5).alias("id"),
+                         (pl.col("OD_rate_AIAN")*100000).alias("drd_AIAN_p100k"))
+    
+    df = df.group_by("id").agg(
+            pl.col("drd_AIAN_p100k").mean(),
+            pl.col("Jurisdiction").first(),
+            pl.col("cnty_name").first(),
+            pl.col("latitude").first(),
+            pl.col("longitude").first())
+    
+    return df
+    
+def clean_counties():
+
+    #County Level Data
+    county_drd = pl.read_csv("data/drd_by_county.csv", ignore_errors=True)
+    county_drd = county_drd.with_columns((pl.col("OD_rate_AIAN")*100000).round(decimals = 3).alias("drd_AIAN_p100k"))
+    county_drd = county_drd.with_columns((pl.col("OD_rate_non_AIAN")*100000).round(decimals = 3).alias("drd_non_p100k"))
+    county_drd = county_drd.with_columns(pl.col("state_crim").map_elements(make_juris_labels,
+                                                                           return_dtype= pl.String
+                                                                           ).alias("Jurisdiction"))
+    return county_drd
+
 #### CLEANING FUNCTIONS SECTION ######
 
 def clean_states():
@@ -86,11 +144,14 @@ def clean_states():
 
 def load_states():
     AIAN_deaths = clean_states()
-    AIAN_deaths = AIAN_deaths.write_csv()
     return AIAN_deaths
 
 def load_state_agg():
     AIAN_deaths = clean_states()
     AIAN_deaths = group_states_mod(df = AIAN_deaths)
     return AIAN_deaths.write_csv()
+
+def load_counties():
+    counties = clean_counties()
+    return counties
     

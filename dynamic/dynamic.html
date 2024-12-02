@@ -61,24 +61,111 @@
                               {year : 2006}, {year: 2007}, {year:2008}, {year:2009},
                               {year : 2010}, {year : 2011}, {year :2012}, {year:2013},
                                {year: 2014}, {year: 2015}, {year: 2016}, {year: 2017},
-                                {year: 2018}, {year: 2019}, {year: 2020}]
+                                {year: 2018}, {year: 2019}, {year: 2020}];
 
-          dropdown.selectAll("option")
+         dropdown.selectAll("option")
               .data(years_range)
               .join("option")
               .attr("value", d => d.year)
               .text(d => d.year.toString());
-
+          
+              
+          
         // Sets the base layer that we call d3 on
         const width = 975;
         const height = 610;
         const svg = d3
           .select("#map")
           .append("svg")
-          .attr("viewBox", [0, 0, width, height])
+          .attr("viewBox", [0, 0, 975, 610])
           .attr("width", width)
           .attr("height", height);
+      
+      // define the function for zooming in on a state
+      // Load the TopoJSON data
+      function map_state(id){
+          let search = "http://127.0.0.1:5000/counties?id=";
+          let query = search + id;
+          Promise.all([
+          d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+          d3.csv(query)
+        ]).
+          then(([map_data, overview_data]) => {
+            console.log(map_data);
 
+            let geojson = topojson.feature(map_data, map_data.objects.counties);
+            let counties = geojson.features
+
+            // Now we need to find the state we are interested in
+            const stateFIPS = "06"; // FIPS code for California
+            const state = topojson.feature(map_data, map_data.objects.states).features
+            .find(d => d.id === stateFIPS);
+
+            const projection = d3.geoAlbers()
+            .scale(1)
+            .translate([0, 0])
+
+            const path = d3.geoPath()
+            .projection(projection);
+
+            // source: https://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
+            let b = path.bounds(state);
+            let s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+            let t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+            // Update the projection to use computed scale & translate.
+            projection
+            .scale(s)
+            .translate(t);
+
+            //Pick Out the State we are interested in
+            const cntiesjson = topojson.feature(map_data, map_data.objects.states)
+            .features.filter(function(d) { return d.properties.id == stateFIPS;})
+
+            // Set the color scale
+            // Define the scale for purple and orange
+            color_data = overview_data.slice(1).map(row => row['drd_AIAN_p100k'])
+            data_range = d3.extent(color_data.map(Number))
+            const purpleScale = d3
+            .scaleSequential(d3.interpolatePurples)
+            .domain([0, Math.max(...data_range)]);
+        
+            const orangeScale = d3
+              .scaleSequential(d3.interpolateOranges)
+              .domain(data_range);
+
+        // Create a mapping between our csv and the id
+        // To figure this out I asked Perplexity AI:
+        // How would I do a nested data join with a topojson file?
+        const dataMap = new Map(overview_data.map(d => [d.FIPS, d]));
+        counties.forEach(feature => {
+        const matchingData = dataMap.get(feature.id); 
+        if (matchingData) {
+            feature.properties = {
+                ...feature.properties,
+                ...matchingData 
+            };
+          };
+
+            // Draw the map
+            svg
+            .selectAll("path")                
+            .data(counties)
+            .join("path")
+            .attr('d', path);})
+            .attr("fill", function(d) {
+          if (d.properties.rd_AIAN_p100k === 'undefined'){
+            return "#ccc"}
+          else if (d.properties.Jurisdiction === "State"){
+          return orangeScale(d.properties.drd_AIAN_p100k);}
+          else if (d.properties.Jurisdiction === "Tribal Authority"){
+          return purpleScale(d.properties.drd_AIAN_p100k)}
+          else return "#ccc";})
+
+          });
+        };
+
+      function map_us(csv_request){ 
       // set up projection centered on U.S.
       const projection = d3
         // DEMO: change projection
@@ -92,35 +179,23 @@
       const path = d3.geoPath().projection(projection);
       
       
-        // placeholder tooltip
-        const tooltip = d3
-        .select("body")
-        .append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
+      // placeholder tooltip
+      const tooltip = d3
+      .select("body")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
-        // display data
+      // display data
       Promise.all([
         d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json"),
-        d3.csv("http://127.0.0.1:5000/overview.csv")
+        d3.csv(csv_request)
       ]).then(([map_data, overview_data]) => {
         
-        //let overview_data = d3.csvParse(overview_text);
-        console.log(overview_data);
+
 
         // Define the state boundaries in geojson
         let statesjson = topojson.feature(map_data, map_data.objects.states);
-
-        // Define the scale for purple and orange
-        color_data = overview_data.slice(1).map(row => row['drd_AIAN_p100k'])
-        data_range = d3.extent(color_data.map(Number))
-        const purpleScale = d3
-          .scaleSequential(d3.interpolatePurples)
-          .domain([0, Math.max(...data_range)]);
-        
-        const orangeScale = d3
-          .scaleSequential(d3.interpolateOranges)
-          .domain(data_range);
         
         // Create a mapping between our csv and the id
         // To figure this out I asked Perplexity AI:
@@ -135,8 +210,6 @@
             };
         }
         });
-        
-
         
         svg
           .selectAll(".group")
@@ -163,8 +236,26 @@
             tooltip.transition().duration(500).style("opacity", 0);
           });
           ;
+      });}
+
+      window.addEventListener('DOMContentLoaded', async (event) => {
+        let start = "http://127.0.0.1:5000/overview.csv"
+        //map_us(start)
+        map_state("06")
       });
 
+      // What happens when the dropdown is changed?
+      dropdown.on("change", function() {
+        let cy = d3.select(this).property("value");
+        d3.selectAll("#map")
+        .selectAll("path")
+        .remove();
+        csv = "http://127.0.0.1:5000/all-states?year=" + cy.toString();
+        console.log("csv:", csv);
+        map_us(csv);
+        console.log("year:", cy);});
+      
+      
       </script>
       
       <script>
