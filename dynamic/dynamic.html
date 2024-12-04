@@ -35,6 +35,13 @@
         </li>
       </ol>
 
+      <button onclick="resetPage()">Reset to State-Level Cross-Year Averages</button>
+
+      <script>
+          function resetPage() {
+              window.location.reload();
+          }
+      </script>
 
       <div class="dropdown-container">
         <label for="dropdown">Choose A Year:</label>
@@ -236,15 +243,15 @@
       
       const purpleScale = d3
       .scaleSequential(d3.interpolatePurples)
-      .domain([0, Math.max(...data_range)]);
+      .domain([-50, Math.max(...data_range)]);
 
       const blueScale = d3
       .scaleSequential(d3.interpolateGreens)
-      .domain([0, Math.max(...data_range)]);
+      .domain([-50, Math.max(...data_range)]);
   
       const orangeScale = d3
         .scaleSequential(d3.interpolateOranges)
-        .domain(data_range);
+        .domain([-50, Math.max(...data_range)]);
 
         // Define the state boundaries in geojson
         let statesjson = topojson.feature(map_data, map_data.objects.states);
