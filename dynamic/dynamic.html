@@ -102,7 +102,7 @@
             let counties = geojson.features
 
             // Now we need to find the state we are interested in
-            const stateFIPS = id; // FIPS code for California
+            const stateFIPS = id; // FIPS code for our selected state
             const state = topojson.feature(map_data, map_data.objects.states).features
             .find(d => d.id === stateFIPS);
 
@@ -160,17 +160,29 @@
             .join("path")
             .attr('d', path)
             .attr("fill", function(d) {
-           if (d.properties.Jurisdiction === "State"){
-          return orangeScale(d.properties.drd_AIAN_p100k);}
-          else if (d.properties.Jurisdiction === "Tribal Authority"){
-          return purpleScale(d.properties.drd_AIAN_p100k)}
-          else if (d.FIPS === id) {return "#ccc"}
-          else {return "#ccc"};})
+              let C_FIPS = d.id;
+              let S_FIPS = C_FIPS.slice(0, 2);
+              if (d.properties.Jurisdiction === "State"){
+                return orangeScale(d.properties.drd_AIAN_p100k);
+              }
+              else if (d.properties.Jurisdiction === "Tribal Authority"){
+                return purpleScale(d.properties.drd_AIAN_p100k)
+              }
+              else if (S_FIPS === id){
+                return "#ccc"
+              }
+              else {
+                return `rgb(128, 157, 225)`
+              }
+              })
           .on("mouseover", function (event, d) {
-            tooltip.transition().duration(200).style("opacity", 0.9);
+            let opacity_cnty = 0.9
+            if (d.properties.cnty_name === undefined){opacity_cnty = 0}
+            tooltip.transition().duration(200).style("opacity", opacity_cnty);
             tooltip
               .html(
-                `${d.properties.cnty_name}, ${d.properties.state_abb} <br/>
+                `
+                ${d.properties.cnty_name}, ${d.properties.state_abb} <br/>
                  Criminal Jurisdiction: ${d.properties.Jurisdiction} <br/>
                 ${d.properties.drd_AIAN_p100k} per 100K`)
               .style("left", event.pageX + 10 + "px")
@@ -257,33 +269,40 @@
           .join("path")
           .attr('d', d3.geoPath())
           .attr("fill", function(d) {
-          if (d.properties.rd_AIAN_p100k === 'undefined'){
-            return "#ccc"}
-          else if (d.properties.Jurisdiction === "State"){
-          return orangeScale(d.properties.drd_AIAN_p100k);}
-          else if (d.properties.Jurisdiction === "Mixed"){
-            return blueScale(d.properties.drd_AIAN_p100k);
+            if (
+              d.properties.drd_AIAN_p100k === undefined
+            ){
+              return "#ccc"}
+
+            else if (d.properties.Jurisdiction === "State"){
+              return orangeScale(d.properties.drd_AIAN_p100k);}
+
+            else if (d.properties.Jurisdiction === "Mixed"){
+              return blueScale(d.properties.drd_AIAN_p100k);
           }
-          else if (d.properties.Jurisdiction === "Tribal Authority"){
-          return purpleScale(d.properties.drd_AIAN_p100k)}
-          else return "#ccc";})
+            else if (d.properties.Jurisdiction === "Tribal Authority"){
+              return purpleScale(d.properties.drd_AIAN_p100k)}
+
+            else return "#ccc";})
           .attr("code", function(d){return d.properties.id})
           .on("click", function(){
             let state_id = d3.select(this).attr("code")
-            if (state_id===undefined){return}
+            let fill_color = d3.select(this).attr("fill")
+            if (fill_color==="#ccc"){return}
             d3.selectAll("#map")
             .selectAll("path")
             .remove();
             map_state(state_id, 2020)})
           .on("mouseover", function (event, d) {
-            let mod = 0;
-            if (d.properties.State === undefined)
-            {let mod = 200}
-            tooltip.transition().duration(200-mod).style("opacity", 0.9);
+
+            let opacity = 0.9
+            
+            if (d.properties.State === undefined){opacity = 0}
+
+            tooltip.transition().duration(200).style("opacity", opacity);
             tooltip
               .html(
-                 `${d.properties.State} <br/>
-                 Criminal Jurisdiction Held by: ${d.properties.Jurisdiction} <br/>
+                 `Criminal Jurisdiction Held by: ${d.properties.Jurisdiction} <br/>
                 ${d.properties.drd_AIAN_p100k} deaths per 100,000 Persons`)
               .style("left", event.pageX + 10 + "px")
               .style("top", event.pageY - 28 + "px");
@@ -308,11 +327,7 @@
       window.addEventListener('DOMContentLoaded', async (event) => {
         let start = "http://127.0.0.1:5000/overview.csv"
         map_us(start)
-        //map_state("27", 2020)
       });
-
-      
-      // This source got me started
       </script>
       
     </section>
