@@ -39,3 +39,24 @@ div.tooltip {
   border-radius: 8px;
   color: white;
 }
+.buttons {
+  width: 200px;
+  margin: 0 auto;
+  display: inline;}
+  
+.action_btn {
+  width: 200px;
+  margin: 0 auto;
+  display: inline;}
+#yearSlider {
+    width: 900px;
+  }
+.sliderticks span {
+  display: flex;
+  justify-content: center;
+  width: 900px;
+  height: 1px;
+  background: #d3d3d3;
+  line-height: 900px;
+  font-size: 12px;
+}

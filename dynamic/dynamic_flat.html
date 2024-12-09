@@ -5,10 +5,36 @@
     <script src="https://unpkg.com/topojson@3"></script>
   </head>
   <body>
-    <h1>The Opiods Crisis on Native American Reservations</h1>
+    <h1>The Opiods Crisis on Reservations</h1>
 
     <section>
-      
+      <h2>  </h2>
+      <p> How to use this Map </p>
+
+      <ol>
+        <li>
+            This Map loads with the Average Drug-Related Death rates
+            in each state accross all years. Darker colors correspond to 
+            higher death-rates.
+        </li>
+        <li>
+            Hover over a state to view that state's death rate.
+        </li>
+        <li>
+            Select a specific year to view the death rates in that year.
+        </li>
+        <li>
+            In purple states Tribes have criminal jurisdiction. In orange states
+            Tribes don't have criminal jurisdiction. Green states are mixed.
+        </li>
+        <li>
+            Click a specific state to see the breakdown at the county level!
+        </li>
+        <li>
+            Have fun!
+        </li>
+      </ol>
+
       <button onclick="resetPage()">Reset to State-Level Cross-Year Averages</button>
       <script>
           function resetPage() {
@@ -22,15 +48,13 @@
         </select>
         </div> 
       
+      <!-- This is where the content should go -->
+      <div id = citations>        
+      </div>
       
       <div class="container">
         <div id="map"></div>
-      
-      <div class = "slider">
-        <input type="range" id="yearSlider" min="1999" max="2020" value="2020">
-          <span id="selectedYear"></span>
-          <div class="sliderticks" id="yearTicks"></div>
-        </div>
+        <svg></svg>
       </div>   
 
       <script>
@@ -78,162 +102,13 @@
             .scaleSequential(d3.interpolateGreens)
             .domain([adjusted_start, color_max]);}
         
-        // Set the map ID to be a container object
-       // d3
-        //.select("#map")
-        //.style('display', 'flex');
+        // Sets the base layer that we call d3 on
         const width = 975;
         const height = 610;
-        
-        // Set the call for adding the legend
-        legend_width = width * 0.6
-        legend_height = 20
-        const legend = d3
-          .select("#map")
-          .append("svg")
-          .attr("viewBox", [0, 0, width, 120])
-          .attr("width", width)
-          .attr("height", 120);
-        
-         // Define the function for adding the legend
-
-         function map_legend(scale_max){
-       
-              // Clear out the last legend
-              d3.selectAll("#map")
-                .selectAll("defs")
-                .remove();
-
-              d3.selectAll("#map")
-                .selectAll("g")
-                .remove();
-
-              // Create the legend from a linnear gradient 
-              // source: https://www.visualcinnamon.com/2016/05/smooth-color-legend-d3-svg-gradient/
-              
-              var defs = legend.append("defs");
-              const text_center = 200;
-
-              //Append a linearGradient element to the defs and give it a unique id
-              var orangeGradient = defs.append("linearGradient")
-                .attr("id", "orange-gradient")
-                .attr("x1", "0%")
-                .attr("y1", "0%")
-                .attr("x2", "100%")
-                .attr("y2", "0%");
-
-              orangeGradient.append("stop")
-                  .attr("offset", "0%")
-                  .attr("stop-color", orangeScale(0)); //light blue
-
-              orangeGradient.append("stop")
-                .attr("offset", "100%")
-                .attr("stop-color", orangeScale(scale_max)); //dark blue
-              
-              const orangeGroup = legend.append("g")
-
-              orangeGroup.append("rect")
-                .attr("width", legend_width)
-                .attr("height", legend_height)
-                .attr("x", 0)
-                .attr("y", 20)
-                .style("fill", "url(#orange-gradient)");
-              
-              orangeGroup.append("text")
-                .attr("x", 0)
-                .attr("y", 15)
-                .text("Who enforces the law on reservations? What is the Native American Drug-Related Death Rate?")
-
-              orangeGroup.append("text")
-                .attr("x", text_center)
-                .attr("y", 38)
-                .attr("fill", "black")
-                .text("State")
-              
-
-              //Append a purple element to the defs and give it a unique id
-              var purpleGradient = defs.append("linearGradient")
-                .attr("id", "purple-gradient")
-                .attr("x1", "0%")
-                .attr("y1", "0%")
-                .attr("x2", "100%")
-                .attr("y2", "0%");
-
-              purpleGradient.append("stop")
-                  .attr("offset", "0%")
-                  .attr("stop-color", purpleScale(0)); //light blue
-
-              purpleGradient.append("stop")
-                .attr("offset", "100%")
-                .attr("stop-color", purpleScale(scale_max)); //dark blue
-              
-                const purpleGroup = legend.append("g")
-
-                purpleGroup.append("rect")
-                  .attr("width", legend_width)
-                  .attr("height", legend_height)
-                  .attr("x", 0)
-                  .attr("y", 40)
-                  .style("fill", "url(#purple-gradient)");
-
-                purpleGroup.append("text")
-                  .attr("x", text_center)
-                  .attr("y", 58)
-                  .attr("fill", "black")
-                  .text("Varies Tribe to Tribe")
-
-              //Append a linearGradient element to the defs and give it a unique id
-              var greenGradient = defs.append("linearGradient")
-                .attr("id", "green-gradient")
-                .attr("x1", "0%")
-                .attr("y1", "0%")
-                .attr("x2", "100%")
-                .attr("y2", "0%");
-
-              greenGradient.append("stop")
-                  .attr("offset", "0%")
-                  .attr("stop-color", greenScale(0)); //light blue
-
-              greenGradient.append("stop")
-                .attr("offset", "100%")
-                .attr("stop-color", greenScale(scale_max)); //dark blue
-                
-              const greenGroup = legend.append("g")
-
-              greenGroup.append("rect")
-                .attr("width", legend_width)
-                .attr("height", legend_height)
-                .attr("x", 0)
-                .attr("y", 60)
-                .style("fill", "url(#green-gradient)");
-              
-              greenGroup.append("text")
-                .attr("x", text_center)
-                .attr("y", 78)
-                .attr("fill", "black")
-                .text("All Recognized Tribes")
-              
-              greenGroup.append("text")
-              .attr("x", 0)
-              .attr("y", 98)
-              .attr("fill", "black")
-              .text("0 Deaths per 100K")
-              
-              greenGroup.append("text")
-              .attr("x", legend_width)
-              .attr("y", 98)
-              .attr("fill", "black")
-              .attr("text-anchor", "end")
-              .text(`${Math.ceil(max_color / 100) * 100} + Deaths per 100K`)
-
-         }
-         
-          // Sets the base layer that we call d3 on
-
         const svg = d3
           .select("#map")
           .append("svg")
-          .attr("viewBox", [0, 0, width, height])
+          .attr("viewBox", [0, 0, 975, 610])
           .attr("width", width)
           .attr("height", height);
       
@@ -245,7 +120,7 @@
           Promise.all([
           d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
           d3.csv(query),
-          d3.json('http://127.0.0.1:5000/quantile-counties?quantile=0.9')]).
+          d3.json('http://127.0.0.1:5000/quantile-counties?quantile=0.95')]).
 
           then(([map_data, overview_data, quant_response]) => {
             console.log(overview_data)
@@ -281,8 +156,6 @@
             max_color = parseFloat(quant_response.quantile);
               console.log(max_color);
               setScales(max_color);
-            
-            map_legend(max_color);
 
             // Set the color scale
             // Define the scale for purple and orange
@@ -419,8 +292,6 @@
         }
         });
         
-        map_legend(max_color)
-
         svg
           .selectAll(".group")
           .data(statesjson.features)
@@ -468,9 +339,7 @@
           .on("mouseout", function () {
             tooltip.transition().duration(500).style("opacity", 0);
           });
-
-      // The Slider
-
+          
       // What happens when the dropdown is changed?
       dropdown.on("change", function() {
         let cy = d3.select(this).property("value");
@@ -490,32 +359,7 @@
         map_us(start)})
       ;
       </script>
-    
-    <p> How to use this Map </p>
-
-    <ol>
-      <li>
-          This Map loads with the Average Drug-Related Death rates
-          in each state accross all years. Darker colors correspond to 
-          higher death-rates.
-      </li>
-      <li>
-          Hover over a state to view that state's death rate.
-      </li>
-      <li>
-          Select a specific year to view the death rates in that year.
-      </li>
-      <li>
-          In purple states Tribes have criminal jurisdiction. In orange states
-          Tribes don't have criminal jurisdiction. Green states are mixed.
-      </li>
-      <li>
-          Click a specific state to see the breakdown at the county level!
-      </li>
-      <li>
-          Have fun!
-      </li>
-    </ol>
+      
     </section>
   </body>
 </html>
