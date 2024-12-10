@@ -114,6 +114,10 @@ def consolidate_counties(state_abb, filter = True):
     return df
     
 def clean_counties():
+    """
+    Cleans the county-level file for use.
+    Returns (polars dataframe): county_drd
+    """
 
     #County Level Data
     county_drd = pl.read_csv("data/drd_by_county.csv", ignore_errors=True)
@@ -130,6 +134,10 @@ def clean_counties():
 #### CLEANING FUNCTIONS SECTION ######
 
 def clean_states():
+    """
+    Cleans the state level file for use.
+    Returns (polars dataframe): AIAN_deaths
+    """
 
     # Load the raw data
     AIAN_deaths = pl.read_csv("data/AIAN_drds_state.csv")
@@ -147,15 +155,30 @@ def clean_states():
     return AIAN_deaths
 
 def load_states():
+    """
+    This returns the output for clean_states. It originally applied other transformations
+    but is currently here as a placeholder for any other data transformations.
+    Returns: Polars DataFrame
+    """
     AIAN_deaths = clean_states()
     return AIAN_deaths
 
 def load_state_agg():
+    """
+    Loads the state-level data and applies an appropriate group-by
+    to get cross-year averages.
+    Returns: CSV
+    """
     AIAN_deaths = clean_states()
     AIAN_deaths = group_states_mod(df = AIAN_deaths)
     return AIAN_deaths.write_csv()
 
 def load_counties():
+    """
+    This returns the output from clean_counties. It originally applied other transformations
+    but is currently here as a placeholder for any other data transformations.
+    Returns: Polars DataFrame
+    """
     counties = clean_counties()
     return counties
     

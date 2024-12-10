@@ -1,25 +1,26 @@
 # PL280ods
-Analyzing AIAN drug related death variation Across Counties and Years
+Mapping AIAN drug-related death variation Across Counties and Years
+Available at: https://pl280drds.netlify.app/
 by Gabriel Barrett
 
 # Project Description
 
-My project is examining variation in drug-related deaths amongs the American Indian and Alaskan
-Native (AIAN) populations. Specifically I am interested in whether drug-related deaths are higher
-on Native American reservations that lack criminal jurisdiction under Public Law 280. I am also interested
-in if this variation is the most acute at the height of the Opioids epidemic. Public Law 280
-is a law passed in 1953 that gave certain states the ability to assume legal jurisdiction on Native American
-Reservations that was otherwise held by the federal government. In the process, it gave the states
-jurisdiction over all minor and municipal criminal offenses. In practice what that means is that
-a Tribal Authority on a reservation under public law 280 has no authority to enforce municipal laws
-unless county law enforcement delegate some authority to it. Tribal Authorities on reservations
-not covered by public law 280 can make and enforce their own municipal codes. 
+This map is usable for examining variation in drug-related deaths amongs the American Indian and Alaskan
+Native (AIAN) populations. It specifically explores whether drug-related deaths are higher
+on Native American reservations that lack criminal jurisdiction under Public Law 280. However it
+also draws attention to regional trends in the Opioids epidemic both amongst and within states. 
+The first thing every user should do when opening the map is check how the death rates chagned
+from 2000 to 2020.
 
-I am researching if the difference in who is responsible for criminal jurisdiction explains variation in drug-related deaths. The idea being that tribal authorities are better able to handle drug use and 
-drug distribution on reservations than county authorities. I am conducting this research
-as part of my work as an intern with the University of Chicago Health Lab.
+The opening page of the map are the average drug-related death rates for American Indians and Alaskan Natives
+accross all years. The user is given the option to change the year selected to any one from 1999-2020. The time
+period nicely captures the growth of the opiods epidemic. Clicking on a state zooms into a county
+level view of the data within that state. The default year for any state is 2020, but earlier years
+can be selected. Minnesota in 2020 is the best example of the difference in death rates amongst counties where Tribes have criminal jurisdiction and where they lack it. 
 
-# How to re-create visuals ***
+*** Hosted Data ***
+The map was created using data cited below from the National Center for Health Statistics. In order
+to process certain slicese of the data a flask-app, hosted at https://flask-app-bold-sound-4625.fly.dev/, is used to run a number of API queries which return certain slices of the data. The specifc queries can be explored under the flask-app directory.
 
 
 # Data Sources
@@ -31,4 +32,4 @@ U.S. Atlas. (n.d.). States Albers 10m [TopoJSON data set]. jsDelivr. https://cdn
 
 U.S. Atlas. (n.d.). Counties 10m [TopoJSON data set]. jsDelivr. https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json
 
-![Alt text](screenshot.png)
+![Alt text](final_screenshot.png)
