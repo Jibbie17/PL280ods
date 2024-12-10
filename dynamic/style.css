@@ -54,9 +54,9 @@ div.tooltip {
 .sliderticks span {
   display: flex;
   justify-content: center;
-  width: 900px;
-  height: 1px;
+  width: 1px;
+  height: 10px;
   background: #d3d3d3;
-  line-height: 900px;
+  line-height: 40px;
   font-size: 12px;
 }
