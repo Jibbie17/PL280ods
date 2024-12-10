@@ -59,6 +59,20 @@ async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
 
 [[package]]
+name = "flask-cors"
+version = "5.0.0"
+description = "A Flask extension adding a decorator for CORS support"
+optional = false
+python-versions = "*"
+files = [
+    {file = "Flask_Cors-5.0.0-py2.py3-none-any.whl", hash = "sha256:b9e307d082a9261c100d8fb0ba909eec6a228ed1b60a8315fd85f783d61910bc"},
+    {file = "flask_cors-5.0.0.tar.gz", hash = "sha256:5aadb4b950c4e93745034594d9f3ea6591f734bb3662e16e255ffbf5e89c88ef"},
+]
+
+[package.dependencies]
+Flask = ">=0.9"
+
+[[package]]
 name = "gunicorn"
 version = "23.0.0"
 description = "WSGI HTTP Server for UNIX"
@@ -106,6 +120,16 @@ MarkupSafe = ">=2.0"
 
 [package.extras]
 i18n = ["Babel (>=2.7)"]
+
+[[package]]
+name = "jsonify"
+version = "0.5"
+description = "A csv to json converter"
+optional = false
+python-versions = "*"
+files = [
+    {file = "jsonify-0.5.tar.gz", hash = "sha256:f340032753577575e9777835809b283fdc9b251867d5d5600389131647f8bfe1"},
+]
 
 [[package]]
 name = "markupsafe"
@@ -249,4 +273,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "26d484b56841341f57f93ee31d7e5ded77a495dd0ae53968c15a3863f0e9b89c"
+content-hash = "a54499d03d3688b968f83292370b37aa1d273fb1eb2c61fefadda126125502c3"

@@ -96,7 +96,7 @@
         // a very light version of the color I was using.
         let adjusted_start = -100
         purpleScale = d3
-            .scaleSequential(d3.interpolatePurples)
+            .scaleSequential(d3.interpolate("white", "#561B55"))
             .domain([adjusted_start, color_max]);
         
         orangeScale = d3

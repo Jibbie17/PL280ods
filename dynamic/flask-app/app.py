@@ -4,7 +4,7 @@ import polars as pl
 from clean import load_state_agg, load_states, load_counties
 
 app = Flask(__name__)
-
+CORS(app, support_credentials=True)
 
 @app.route('/overview.csv')
 def get_overview():
@@ -51,5 +51,5 @@ def get_counties():
     return counties.write_csv()
 
 if __name__ == '__main__':
-    CORS(app)
-    app.run(debug=True)
+    # need to pass an IP and a port
+    app.run(host="0.0.0.0", port=8080)
