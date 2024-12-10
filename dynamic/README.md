@@ -1,6 +1,8 @@
 # PL280ods
 Mapping AIAN drug-related death variation Across Counties and Years
+
 Available at: https://pl280drds.netlify.app/
+
 by Gabriel Barrett
 
 # Project Description
@@ -18,13 +20,12 @@ period nicely captures the growth of the opiods epidemic. Clicking on a state zo
 level view of the data within that state. The default year for any state is 2020, but earlier years
 can be selected. Minnesota in 2020 is the best example of the difference in death rates amongst counties where Tribes have criminal jurisdiction and where they lack it. 
 
-*** Hosted Data ***
+# Hosted Data
 The map was created using data cited below from the National Center for Health Statistics. In order
 to process certain slicese of the data a flask-app, hosted at https://flask-app-bold-sound-4625.fly.dev/, is used to run a number of API queries which return certain slices of the data. The specifc queries can be explored under the flask-app directory.
 
 
 # Data Sources
-
 
 National Center for Health Statistics. (2022). Mortality Multiple Cause Files, 1998-2020 [Data set]. Centers for Disease Control and Prevention. https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Mortality_Multiple
 
