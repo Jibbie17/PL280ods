@@ -2,15 +2,6 @@
 
 h1 {
   Text-align: center;
-  margin: 0em;
-}
-h2 {
-  font-size: 1em;
-  text-align: center;
-}
-h1 + h2 {
-  margin-top: 0;
-  padding-top: 0;
 }
 section {
   border: 0px solid grey;
@@ -18,7 +9,7 @@ section {
   margin: 1em;
 }
 div {
-margin: 0.5em
+margin: 1em
 }
 body {
   font-family: fantasy;
@@ -57,11 +48,15 @@ div.tooltip {
   width: 200px;
   margin: 0 auto;
   display: inline;}
-
-  .container {
-    position: relative;
+#yearSlider {
+    width: 900px;
   }
-  #legend {
-    position: absolute;
-    right: -100;
-  }
+.sliderticks span {
+  display: flex;
+  justify-content: center;
+  width: 900px;
+  height: 1px;
+  background: #d3d3d3;
+  line-height: 900px;
+  font-size: 12px;
+}

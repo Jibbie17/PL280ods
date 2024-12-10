@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   class="marks"
+   width="680"
+   height="376"
+   viewBox="0 0 680 376"
+   id="svg47"
+   sodipodi:docname="vis9.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs47" />
+  <sodipodi:namedview
+     id="namedview47"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.0014341"
+     inkscape:cx="330.02671"
+     inkscape:cy="139.30023"
+     inkscape:window-width="1440"
+     inkscape:window-height="786"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg47" />
+  <rect
+     width="678.91553"
+     height="374.97708"
+     fill="#ffffff"
+     id="rect1"
+     x="0"
+     y="0.022911953"
+     style="stroke-width:1.06946" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.33333px;line-height:1;font-family:'.Al Nile PUA';-inkscape-font-specification:'.Al Nile PUA, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#060606;fill-opacity:1"
+     x="481.47876"
+     y="300.9422"
+     id="text52-8-7"><tspan
+       sodipodi:role="line"
+       id="tspan6"
+       x="481.47876"
+       y="300.9422">*Estimates are OLS coefficients</tspan><tspan
+       sodipodi:role="line"
+       x="481.47876"
+       y="311.45471"
+       id="tspan12">for the effect of being in a county</tspan><tspan
+       sodipodi:role="line"
+       x="481.47876"
+       y="321.96719"
+       id="tspan13">where Tribes lack criminal jurisdiction</tspan><tspan
+       sodipodi:role="line"
+       x="481.47876"
+       y="332.47971"
+       id="tspan14">on the AIAN drug-related death rate.</tspan></text>
+  <text
+     text-anchor="middle"
+     font-family="sans-serif"
+     font-size="13px"
+     font-weight="bold"
+     fill="#000000"
+     opacity="1"
+     id="text40-4"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.6667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;display:inline;opacity:1;fill:#000000"
+     y="28.94043"
+     x="264.146"><tspan
+       sodipodi:role="line"
+       id="tspan60">Both models estimate that counties where tribes lack jurisdiction have higher death rates</tspan></text>
+  <g
+     id="g48"
+     transform="translate(38,-22)">
+    <text
+       text-anchor="middle"
+       font-family="sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#000000"
+       opacity="1"
+       id="text44-3"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:'.Al Nile PUA';-inkscape-font-specification:'.Al Nile PUA, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;display:inline;fill:#000000"
+       x="539.17078"
+       y="94.104195"
+       inkscape:transform-center-x="1.3803667"
+       inkscape:transform-center-y="-2.07055"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         id="tspan56">Legend</tspan></text>
+    <g
+       id="g56"
+       transform="translate(-29.11879,23.227254)">
+      <path
+         aria-label="AIAN Drug Related Death Rate per 100k Persons: 103.2; Jurisdiction: State"
+         role="graphics-symbol"
+         aria-roledescription="point"
+         d="m 540.54553,90.09175 a 2.739,2.739 0 1 1 -5.478,0 2.739,2.739 0 1 1 5.478,0"
+         fill="#800080"
+         stroke-width="2"
+         opacity="0.7"
+         id="path38-7"
+         style="display:inline" />
+    </g>
+    <line
+       aria-label="lower_CI_upper: 104.8; Jurisdiction: State; upper_CI_upper: 101.7; CI_lower: 101.7; CI_upper: 104.8"
+       role="graphics-symbol"
+       aria-roledescription="errorbar"
+       x2="497.20328"
+       y2="139.82544"
+       stroke="#000000"
+       id="line37-9"
+       x1="521.81854"
+       y1="139.82544"
+       style="display:inline;stroke-width:0.660849" />
+    <g
+       id="g57"
+       transform="translate(-27.11879,21.227254)"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:'.Al Nile PUA';-inkscape-font-specification:'.Al Nile PUA, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff"
+         x="562.49939"
+         y="93.033653"
+         id="text51"><tspan
+           id="tspan51"
+           x="562.49939"
+           y="93.033653"
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#030202;fill-opacity:1">Estimate</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:0.7;font-family:'.Al Nile PUA';-inkscape-font-specification:'.Al Nile PUA, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#060606;fill-opacity:1"
+       x="536.07086"
+       y="133.31915"
+       id="text52"><tspan
+         sodipodi:role="line"
+         id="tspan52"
+         x="536.07086"
+         y="133.31915"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;line-height:0.7;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#060606;fill-opacity:1">95% </tspan><tspan
+         sodipodi:role="line"
+         x="536.07086"
+         y="142.41916"
+         id="tspan55"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;line-height:0.7;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#060606;fill-opacity:1">Confidence </tspan><tspan
+         sodipodi:role="line"
+         x="536.07086"
+         y="151.51915"
+         id="tspan54"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;line-height:0.7;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#060606;fill-opacity:1">Interval</tspan><tspan
+         sodipodi:role="line"
+         x="536.07086"
+         y="160.61916"
+         id="tspan53"
+         style="line-height:0.7" /></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.977136;stroke-opacity:0.5"
+       id="rect57"
+       width="89.869949"
+       height="69.854637"
+       x="493.48856"
+       y="97.764549" />
+  </g>
+  <g
+     fill="none"
+     stroke-miterlimit="10"
+     transform="translate(167.98855,35.001432)"
+     id="g47"
+     style="display:inline">
+    <g
+       class="mark-group role-frame root"
+       role="graphics-object"
+       aria-roledescription="group mark container"
+       id="g46">
+      <g
+         id="g45">
+        <path
+           class="background"
+           aria-hidden="true"
+           d="m 0.5,0.5 h 300 v 300 H 0.5 Z"
+           stroke="#dddddd"
+           id="path1" />
+        <g
+           id="g44">
+          <g
+             class="mark-group role-axis"
+             role="graphics-symbol"
+             aria-roledescription="axis"
+             aria-label="X-axis titled 'Difference in AIAN Drug Related Death Rate per 100k Persons' for a linear scale with values from 0 to 90"
+             id="g25">
+            <g
+               transform="translate(0.5,300.5)"
+               id="g24">
+              <path
+                 class="background"
+                 aria-hidden="true"
+                 d="M 0,0 Z"
+                 pointer-events="none"
+                 id="path2" />
+              <g
+                 id="g23">
+                <g
+                   class="mark-rule role-axis-tick"
+                   pointer-events="none"
+                   id="g11">
+                  <line
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line2"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(33)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line3"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(67)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line4"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(100)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line5"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(133)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line6"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(167)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line7"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(200)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line8"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(233)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line9"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(267)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line10"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(300)"
+                     x2="0"
+                     y2="5"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line11"
+                     x1="0"
+                     y1="0" />
+                </g>
+                <g
+                   class="mark-text role-axis-label"
+                   pointer-events="none"
+                   id="g20">
+                  <text
+                     text-anchor="start"
+                     transform="translate(0,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text11">0</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(33.333333,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text12">10</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(66.666667,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text13">20</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(100,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text14">30</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(133.33333,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text15">40</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(166.66667,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text16">50</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(200,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text17">60</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(233.33333,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text18">70</text>
+                  <text
+                     text-anchor="middle"
+                     transform="translate(266.66667,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text19">80</text>
+                  <text
+                     text-anchor="end"
+                     transform="translate(300,15)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text20">90</text>
+                </g>
+                <g
+                   class="mark-rule role-axis-domain"
+                   pointer-events="none"
+                   id="g21">
+                  <line
+                     x2="300"
+                     y2="0"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line20"
+                     x1="0"
+                     y1="0" />
+                </g>
+                <g
+                   class="mark-text role-axis-title"
+                   pointer-events="none"
+                   id="g22">
+                  <text
+                     text-anchor="middle"
+                     transform="translate(150,30)"
+                     font-family="sans-serif"
+                     font-size="11px"
+                     font-weight="bold"
+                     fill="#000000"
+                     opacity="1"
+                     id="text21">Difference in AIAN Drug Related Death Rate per 100k Persons</text>
+                </g>
+              </g>
+              <path
+                 class="foreground"
+                 aria-hidden="true"
+                 d=""
+                 pointer-events="none"
+                 display="none"
+                 id="path23" />
+            </g>
+          </g>
+          <g
+             class="mark-group role-axis"
+             role="graphics-symbol"
+             aria-roledescription="axis"
+             aria-label="Y-axis titled 'Model' for a discrete scale with 2 values: Controls, No Controls"
+             id="g32">
+            <g
+               transform="translate(0.5,0.5)"
+               id="g31">
+              <path
+                 class="background"
+                 aria-hidden="true"
+                 d="M 0,0 Z"
+                 pointer-events="none"
+                 id="path25" />
+              <g
+                 id="g30">
+                <g
+                   class="mark-rule role-axis-tick"
+                   pointer-events="none"
+                   id="g26">
+                  <line
+                     transform="translate(0,75)"
+                     x2="-5"
+                     y2="0"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line25"
+                     x1="0"
+                     y1="0" />
+                  <line
+                     transform="translate(0,225)"
+                     x2="-5"
+                     y2="0"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line26"
+                     x1="0"
+                     y1="0" />
+                </g>
+                <g
+                   class="mark-text role-axis-label"
+                   pointer-events="none"
+                   id="g27">
+                  <text
+                     text-anchor="end"
+                     transform="translate(-7,77.5)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text26">Controls</text>
+                  <text
+                     text-anchor="end"
+                     transform="translate(-7,227.5)"
+                     font-family="sans-serif"
+                     font-size="10px"
+                     fill="#000000"
+                     opacity="1"
+                     id="text27">No Controls</text>
+                </g>
+                <g
+                   class="mark-rule role-axis-domain"
+                   pointer-events="none"
+                   id="g28">
+                  <line
+                     x2="0"
+                     y2="300"
+                     stroke="#888888"
+                     stroke-width="1"
+                     opacity="1"
+                     id="line27"
+                     x1="0"
+                     y1="0" />
+                </g>
+                <g
+                   class="mark-text role-axis-title"
+                   pointer-events="none"
+                   id="g29">
+                  <text
+                     text-anchor="middle"
+                     transform="rotate(-90,42.101074,107.89893)"
+                     font-family="sans-serif"
+                     font-size="11px"
+                     font-weight="bold"
+                     fill="#000000"
+                     opacity="1"
+                     id="text28">Model</text>
+                </g>
+              </g>
+              <path
+                 class="foreground"
+                 aria-hidden="true"
+                 d=""
+                 pointer-events="none"
+                 display="none"
+                 id="path30" />
+            </g>
+          </g>
+          <g
+             class="mark-rule role-mark layer_0_marks"
+             role="graphics-object"
+             aria-roledescription="rule mark container"
+             id="g33">
+            <line
+               aria-label="lower_CI_upper: 24.4; Model: No Controls; upper_CI_upper: 10.1; CI_lower: 10.1; CI_upper: 24.4"
+               role="graphics-symbol"
+               aria-roledescription="errorbar"
+               transform="translate(81.333333,225)"
+               x2="-47.666668"
+               y2="0"
+               stroke="#000000"
+               id="line32"
+               x1="0"
+               y1="0" />
+            <line
+               aria-label="lower_CI_upper: 82.9; Model: Controls; upper_CI_upper: 23.2; CI_lower: 23.2; CI_upper: 82.9"
+               role="graphics-symbol"
+               aria-roledescription="errorbar"
+               transform="translate(276.33333,75)"
+               x2="-199"
+               y2="0"
+               stroke="#000000"
+               id="line33"
+               x1="0"
+               y1="0" />
+          </g>
+          <g
+             class="mark-symbol role-mark layer_1_marks"
+             role="graphics-object"
+             aria-roledescription="symbol mark container"
+             id="g34">
+            <path
+               aria-label="Difference in AIAN Drug Related Death Rate per 100k Persons: 17.2; Model: No Controls"
+               role="graphics-symbol"
+               aria-roledescription="point"
+               transform="translate(57.333333,225)"
+               d="M 2.739,0 A 2.739,2.739 0 1 1 -2.739,0 2.739,2.739 0 1 1 2.739,0"
+               fill="#800080"
+               stroke-width="2"
+               opacity="0.7"
+               id="path33" />
+            <path
+               aria-label="Difference in AIAN Drug Related Death Rate per 100k Persons: 53.1; Model: Controls"
+               role="graphics-symbol"
+               aria-roledescription="point"
+               transform="translate(177,75)"
+               d="M 2.739,0 A 2.739,2.739 0 1 1 -2.739,0 2.739,2.739 0 1 1 2.739,0"
+               fill="#800080"
+               stroke-width="2"
+               opacity="0.7"
+               id="path34" />
+          </g>
+          <g
+             class="mark-text role-mark layer_2_marks"
+             role="graphics-object"
+             aria-roledescription="text mark container"
+             id="g35">
+            <text
+               aria-label="State Criminal Jurisdiction Coefficient Estimate: 17.2; Model: No Controls"
+               role="graphics-symbol"
+               aria-roledescription="text mark"
+               text-anchor="middle"
+               transform="translate(57.333333,218)"
+               font-family="sans-serif"
+               font-size="11px"
+               fill="#000000"
+               id="text34">17.2</text>
+            <text
+               aria-label="State Criminal Jurisdiction Coefficient Estimate: 53.1; Model: Controls"
+               role="graphics-symbol"
+               aria-roledescription="text mark"
+               text-anchor="middle"
+               transform="translate(177,68)"
+               font-family="sans-serif"
+               font-size="11px"
+               fill="#000000"
+               id="text35">53.1</text>
+          </g>
+          <g
+             class="mark-text role-mark layer_3_marks"
+             role="graphics-object"
+             aria-roledescription="text mark container"
+             id="g37">
+            <text
+               aria-label="CI_upper: 24.4; Model: No Controls"
+               role="graphics-symbol"
+               aria-roledescription="text mark"
+               text-anchor="middle"
+               transform="translate(86.333333,238)"
+               font-family="sans-serif"
+               font-size="11px"
+               fill="#000000"
+               id="text36">24.4</text>
+            <text
+               aria-label="CI_upper: 82.9; Model: Controls"
+               role="graphics-symbol"
+               aria-roledescription="text mark"
+               text-anchor="middle"
+               transform="translate(281.33333,88)"
+               font-family="sans-serif"
+               font-size="11px"
+               fill="#000000"
+               id="text37">82.9</text>
+          </g>
+          <g
+             class="mark-text role-mark layer_4_marks"
+             role="graphics-object"
+             aria-roledescription="text mark container"
+             id="g39">
+            <text
+               aria-label="CI_lower: 10.1; Model: No Controls"
+               role="graphics-symbol"
+               aria-roledescription="text mark"
+               text-anchor="middle"
+               transform="translate(28.666667,238)"
+               font-family="sans-serif"
+               font-size="11px"
+               fill="#000000"
+               id="text38">10.1</text>
+            <text
+               aria-label="CI_lower: 23.2; Model: Controls"
+               role="graphics-symbol"
+               aria-roledescription="text mark"
+               text-anchor="middle"
+               transform="translate(72.333333,88)"
+               font-family="sans-serif"
+               font-size="11px"
+               fill="#000000"
+               id="text39">23.2</text>
+          </g>
+          <g
+             class="mark-group role-title"
+             id="g43"
+             style="display:inline">
+            <g
+               transform="translate(150,-17)"
+               id="g42">
+              <path
+                 class="background"
+                 aria-hidden="true"
+                 d="M 0,0 Z"
+                 pointer-events="none"
+                 id="path39" />
+              <g
+                 id="g41">
+                <g
+                   class="mark-text role-title-text"
+                   role="graphics-symbol"
+                   aria-roledescription="title"
+                   aria-label="Title text 'Estimated Difference in AIAN Drug Related Deathrate In Counties Tribes Lack Criminal Jurisdiction'"
+                   pointer-events="none"
+                   id="g40" />
+                <text
+                   text-anchor="middle"
+                   font-family="sans-serif"
+                   font-size="13px"
+                   font-weight="bold"
+                   fill="#000000"
+                   opacity="1"
+                   id="text40"
+                   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;display:inline;opacity:1;fill:#000000"
+                   y="-4"><tspan
+                     sodipodi:role="line"
+                     id="tspan59"
+                     x="0"
+                     y="-4">Adding Controls Increases Estimated Difference in AIAN Drug-Related Death Rate</tspan></text>
+              </g>
+              <path
+                 class="foreground"
+                 aria-hidden="true"
+                 d=""
+                 pointer-events="none"
+                 display="none"
+                 id="path41" />
+            </g>
+          </g>
+        </g>
+        <path
+           class="foreground"
+           aria-hidden="true"
+           d=""
+           display="none"
+           id="path44" />
+      </g>
+    </g>
+  </g>
+</svg>
