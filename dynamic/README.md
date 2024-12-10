@@ -1,4 +1,4 @@
-# PL280ods
+# PL280 DRD Map
 Mapping AIAN drug-related death variation Across Counties and Years
 
 Available at: https://pl280drds.netlify.app/
